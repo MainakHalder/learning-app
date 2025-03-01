@@ -6,13 +6,16 @@
     <title>Learning App</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 </head>
-<body class="bg-dark text-light">
+<body class="bg-dark text-light text-center">
     <header>
         <nav class="navbar navbar-expand-lg bg-danger py-3">
             <div class="container-fluid">
-                <a class="navbar-brand text-light" >Learning App</a>
-                <div class="container float-end">
-                    <ul class="navbar-nav">
+                <a class="navbar-brand text-light" href="#">Learning App</a>
+                <button class="navbar-toggler text-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link text-light" href="/">Home</a></li>
                         <li class="nav-item"><a class="nav-link text-light" href="stringEasy.html">Dashboard</a></li>
                         <li class="nav-item"><a class="nav-link text-light" href="profile.html">Profile</a></li>
@@ -24,44 +27,68 @@
     <main class="my-5">
         <section class="my-3 mx-3">
             <h1 class="fw-semibold fs-3">Contents</h1>
-            <div class="row">
-                <div class="col-md-4 py-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2>Content - 1</h2>
-                        </div>
+            <div class="d-flex justify-content-center gap-4 flex-wrap">
+                <div class="card text-center mx-1" style="width: 18rem;">
+                    <img src="geeks.jpg" class="img-thumbnail card-img-top"/>
+                    <h2 class="card-header">Solve easy questions</h2>
+                    <div class="card-body">                           
+                        <p>Get started with easy string questions</p>
+                        <a class="btn btn-danger text-light" href="stringEasy.html">Get details</a>
                     </div>
                 </div>
-                <div class="col-md-4 py-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2>Content - 2</h2>
-                        </div>
+                <div class="card text-center mx-1" style="width: 18rem;">
+                    <img src="leet.jpg" class="img-thumbnail card-img-top"/>
+                    <h2 class="card-header">Solve medium questions</h2>
+                    <div class="card-body">
+                        <p>Get started with medium string questions</p>
+                        <a class="btn btn-danger text-light" href="stringMedium.html">Get Details</a>
                     </div>
                 </div>
-                <div class="col-md-4 py-5">
-                    <div class="card">
-                        <div class="card-body">
-                            <h2>Content - 3</h2>
-                        </div>
+                <div class="card text-center mx-1" style="width: 18rem;">
+                    <img src="hackerank.jpg" class="img-thumbnail card-img-top"/>
+                    <h2 class="card-header">Solve hard questions</h2>
+                    <div class="card-body">
+                        <p>Get started with hard string questions</p>
+                        <a class="btn btn-danger text-light" href="stringHard.html">Get details</a>
                     </div>
                 </div>
             </div>
         </section>
         <section class="my-3 mx-3">
             <h1 class="fw-semibold fs-3">Testimonials</h1>
-        </section>
-        <section class="my-3 mx-3">
-            <h1 class="fw-semibold fs-3">FAQ</h1>
+            <div class="d-flex justify-content-center flex-column align-items-center">
+                <div class="col-md-8 my-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>I was entirely new to the world of DSA and CP when I discovered Striver's channel. Striver's clear explanations ignited my passion for computer science, introducing me to core concepts like trees, graphs, and dynamic programming. Today, I stand as an...</p>
+                                <footer class="blockquote-footer">Ankit</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 my-3">
+                    <div class="card">
+                        <div class="card-body">
+                            <blockquote class="blockquote mb-0">
+                                <p>DSA always felt like an impossible mountain to climb until I came across Striver's videos. His way of breaking down concepts into digestible pieces helped me tremendously. Today, I not only understand DSA deeply but also enjoy solving challenging problems. Huge thanks to Striver for making this journey exciting!</p>
+                                <footer class="blockquote-footer">Saumya</footer>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
     </main>
-    <footer class="py-3 bg-danger text-light" style="display: flex; justify-content: center;">
-        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+    <footer class="py-3 bg-danger text-light d-flex justify-content-center">
+        <div class="container d-flex justify-content-between align-items-center">
             <p>Connect with us</p>
             <p>Contact us</p>
             <p>&copy; All rights reserved</p>
         </div>
     </footer>
-    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+
+

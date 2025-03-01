@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet">
+
+    <style>
+        /* Light Mode (Default) */
+        body {
+            background-color: #f8f9fa;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        /* Dark Mode */
+        body.dark-mode {
+            background-color: #121212;
+            color: #ffffff;
+        }
+
+        .dark-mode .navbar {
+            background-color: #333 !important;
+        }
+
+        .dark-mode .nav-link {
+            color: #ffffff !important;
+        }
+
+        .dark-mode .btn-outline-light {
+            border-color: #ffffff;
+            color: #ffffff;
+        }
+
+        .dark-mode .btn-outline-light:hover {
+            background-color: #ffffff;
+            color: #000;
+        }
+
+        /* Sidebar Styling */
+        .sidebar {
+            width: 250px;
+            background-color: rgb(222, 50, 50);
+            color: white;
+            height: 100vh;
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: left 0.3s;
+            z-index: 1050;
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .sidebar ul li {
+            margin: 10px 0;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: #c3a69b;
+        }
+
+        .submenu {
+            display: none;
+            padding-left: 20px;
+        }
+
+        .submenu.active {
+            display: block;
+        }
+
+        .content {
+            margin-left: 0;
+            transition: margin-left 0.3s;
+        }
+
+        .content.active {
+            margin-left: 250px;
+        }
+
+        /* Sidebar Close Button */
+        .sidebar-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;  /* Adjusted for better alignment */
+    right: 10px; /* Adjusted for better alignment */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    padding-bottom: 2rem;
+}
+
+        /* Sidebar Toggle Button */
+        .sidebar-toggle {
+            background: none;
+            border: none;
+            font-size: 24px;
+            color: white;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        /* Overlay to close sidebar */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 1049;
+        }
+
+        .overlay.active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-danger py-3">
+            <div class="container-fluid">
+                <button class="sidebar-toggle" id="sidebar-toggle">
+                    <span class="material-symbols-outlined">menu</span>
+                </button>
+                <a class="navbar-brand text-light ms-3" href="index.html">Learning App</a>
+                <div class="ms-auto d-flex align-items-center">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            <button id="theme-toggle" class="btn btn-outline-light d-flex align-items-center">
+                                <span id="theme-icon" class="material-symbols-outlined me-2">light_mode</span> 
+                                <span id="theme-text">Light</span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav> 
+    </header>
+
+    <div class="overlay" id="overlay"></div>
+
+    <main class="container-fluid py-5">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <button class="sidebar-close" id="sidebar-close">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+            <h2><a href="index.html" class="navbar-brand">Learning App</a></h2>
+            <ul>
+                <li>
+                    <a class="tree-toggle">Dashboard <span class="material-symbols-outlined">expand_more</span></a>
+                    <ul class="submenu">
+                        <li>
+                            <a class="tree-toggle">Strings <span class="material-symbols-outlined">expand_more</span></a>
+                            <ul class="submenu">
+                                <li><a href="stringEasy.html">Easy</a></li>
+                                <li><a href="stringMedium.html">Medium</a></li>
+                                <li><a href="stringHard.html">Hard</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a class="tree-toggle">Arrays <span class="material-symbols-outlined">expand_more</span></a>
+                            <ul class="submenu">
+                                <li><a href="arrayEasy.html">Easy</a></li>
+                                <li><a href="arrayMedium.html">Medium</a></li>
+                                <li><a href="arrayHard.html">Hard</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li><a>Account</a></li>
+                <li>
+                    <button id="sidebar-theme-toggle" class="btn btn-outline-light d-flex align-items-center w-100">
+                        <span id="sidebar-theme-icon" class="material-symbols-outlined me-2">light_mode</span> 
+                        <span id="sidebar-theme-text">Light Mode</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="content">
+            <h2>DSA Course</h2>
+            <p>This course is made for people who want to learn DSA from A to Z for free in a well-organized and structured manner. The lecture quality is better than what you get in paid courses, the only thing we don’t provide is doubt support, but trust me our YouTube video comments resolve that as well, we have a wonderful community of 250K+ people who engage in all of the videos.</p>
+            <section>
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <h2>Notes</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    The Series doesn’t focus on any specific programming language. Instead, it emphasizes logic and uses pseudocode.
+
+The first two basic videos might use C++, but for Java tutorials, you can watch other YouTube videos. When tackling core problems of data structures and algorithms (DSA), the Series uses pseudocode that isn’t tied to any particular programming language.
+
+However, you can find code examples in your preferred language in the notes and articles provided.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <h2>Blogs</h2>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    The Series doesn’t focus on any specific programming language. Instead, it emphasizes logic and uses pseudocode.
+    
+    The first two basic videos might use C++, but for Java tutorials, you can watch other YouTube videos. When tackling core problems of data structures and algorithms (DSA), the Series uses pseudocode that isn’t tied to any particular programming language.
+    
+    However, you can find code examples in your preferred language in the notes and articles provided.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section>
+                <h2>Problems</h2>
+                <table class="table table-dark table-hover">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>Problems</th>
+                            <th>Status</th>
+                            <th>Practise</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                          <th scope="row"><input type="checkbox"/></th>
+                          <td>Valid Anagram</td>
+                          <td>
+                            <select class="dropdown" data-bs-theme="dark">
+                            <option>Not yet completed</option>
+                            <option>Done</option>
+                            <option>Not started</option>
+                        </select>
+                        </td>
+                          <td><a href="https://www.geeksforgeeks.org/"><img src="geeks.jpg" alt="GFG" style="width: 32px; height: 32px; margin-left: 2vh;"></a></td>
+                        </tr>
+                        <tr>
+                          <th scope="row"><input type="checkbox"/></th>
+                          <td>Roman to Integer</td>
+                          <td><select class="dropdown" data-bs-theme="dark">
+                            <option>Not yet completed</option>
+                            <option>Done</option>
+                            <option>Not started</option>
+                        </select></td>
+                          <td><a href="https://leetcode.com/">
+                            <img src="leet.jpg" alt="GFG" style="width: 32px; height: 32px; margin-left: 2vh;">
+                          </a></td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><input type="checkbox"/></th>
+                            <td>Longest common prefix</td>
+                            <td><select class="dropdown" data-bs-theme="dark">
+                              <option>Not yet completed</option>
+                              <option>Done</option>
+                              <option>Not started</option>
+                          </select></td>
+                            <td><a href="https://www.hackerrank.com/">
+                                <img src="hackerank.jpg" alt="GFG" style="width: 32px; height: 32px; margin-left: 2vh;">
+                            </a></td>
+                          </tr>
+                      </tbody>
+                  </table>
+            </section>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const sidebar = document.getElementById("sidebar");
+            const sidebarToggle = document.getElementById("sidebar-toggle");
+            const sidebarClose = document.getElementById("sidebar-close");
+            const overlay = document.getElementById("overlay");
+            const themeToggle = document.getElementById("theme-toggle");
+            const themeIcon = document.getElementById("theme-icon");
+            const themeText = document.getElementById("theme-text");
+            const sidebarThemeToggle = document.getElementById("sidebar-theme-toggle");
+            const sidebarThemeIcon = document.getElementById("sidebar-theme-icon");
+            const sidebarThemeText = document.getElementById("sidebar-theme-text");
+
+            function enableDarkMode() {
+                document.body.classList.add("dark-mode");
+                themeIcon.textContent = "dark_mode";
+                themeText.textContent = "Dark";
+                sidebarThemeIcon.textContent = "dark_mode";
+                sidebarThemeText.textContent = "Dark Mode";
+                localStorage.setItem("darkMode", "enabled");
+            }
+
+            function disableDarkMode() {
+                document.body.classList.remove("dark-mode");
+                themeIcon.textContent = "light_mode";
+                themeText.textContent = "Light";
+                sidebarThemeIcon.textContent = "light_mode";
+                sidebarThemeText.textContent = "Light Mode";
+                localStorage.setItem("darkMode", "disabled");
+            }
+
+            if (localStorage.getItem("darkMode") === "enabled") enableDarkMode();
+
+            themeToggle.addEventListener("click", () => document.body.classList.contains("dark-mode") ? disableDarkMode() : enableDarkMode());
+            sidebarThemeToggle.addEventListener("click", () => document.body.classList.contains("dark-mode") ? disableDarkMode() : enableDarkMode());
+
+            sidebarToggle.addEventListener("click", () => { sidebar.classList.add("active"); overlay.classList.add("active"); });
+            sidebarClose.addEventListener("click", () => { sidebar.classList.remove("active"); overlay.classList.remove("active"); });
+
+            document.querySelectorAll('.tree-toggle').forEach(toggle => toggle.addEventListener('click', function () { this.nextElementSibling.classList.toggle("active"); }));
+        });
+    </script>
+</body>
+</html>
+
+
+
